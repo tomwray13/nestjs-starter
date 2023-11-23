@@ -7,6 +7,7 @@ import { LoggerService } from './logger/logger.service';
 import { MiddlewareConsumer } from '@nestjs/common/interfaces';
 import { LoggerMiddleware } from './logger/logger.middleware';
 import { RequestMethod } from '@nestjs/common/enums';
+import { DatabaseModule } from 'src/database/database.module';
 
 @Global()
 @Module({
@@ -14,6 +15,7 @@ import { RequestMethod } from '@nestjs/common/enums';
     ConfigModule.forRoot({
       load: [config],
     }),
+    DatabaseModule,
   ],
   providers: [
     {
