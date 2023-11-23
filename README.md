@@ -18,11 +18,9 @@ Here's how to get started with the repo:
 
 ## Cloning the repo
 
-We’re going to use the NestJS Starter we built in a previous section. If you’re not familiar with the NestJS Starter project, I recommend it out - it comes with a lot of the boilerplate code already set up for you (which we won’t explain in this project).
-
 Follow these steps to get started:
 
-1. Go to the NestJS Starter Github repo
+1. Go to the [NestJS Starter Github repo](https://github.com/tomwray13/nestjs-starter)
 2. Press the Use this template button
 3. Follow the steps to create a new Github repo from the template
 4. Git clone your new repo onto your local machine. For example:
