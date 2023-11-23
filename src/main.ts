@@ -10,6 +10,8 @@ async function bootstrap() {
   });
   app.use(helmet());
   app.useGlobalPipes(new ValidationPipe({ whitelist: true })); // add global validation pipe
-  await app.listen(4000);
+  const port = process.env.PORT ? parseInt(process.env.PORT) : 3000;
+  const host = `0.0.0.0`;
+  await app.listen(port, host);
 }
 bootstrap();
