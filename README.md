@@ -18,16 +18,20 @@ Here's how to get started with the repo:
 
 ## Cloning the repo
 
-1. First, create a new empty Github repo. Make a note of the git URL of the new repo e.g. https://github.com/your-username/new-repo.git
-2. Then on your local machine, clone this starter repo:
-   -- For the default NestJS server, use `git clone git@github.com:tomwray13/nestjs-starter.git <name of your project>`
-3. On your local machine, check out in to the new cloned repo and run the following commands. Make sure you update the URL to the git URL of your new repo:
+We’re going to use the NestJS Starter we built in a previous section. If you’re not familiar with the NestJS Starter project, I recommend it out - it comes with a lot of the boilerplate code already set up for you (which we won’t explain in this project).
+
+Follow these steps to get started:
+
+1. Go to the NestJS Starter Github repo
+2. Press the Use this template button
+3. Follow the steps to create a new Github repo from the template
+4. Git clone your new repo onto your local machine. For example:
 
 ```
-git branch -M main
-git remote set-url origin https://github.com/your-username/new-repo.git
-git push -u origin main
+git clone git@github.com:tomwray13/url-shortener.git
 ```
+
+Checkout into your new repo and follow the steps below:
 
 ## Local set up
 
