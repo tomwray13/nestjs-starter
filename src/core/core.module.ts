@@ -1,5 +1,5 @@
 import { Global, Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import config from '../config';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { TransformResponseInterceptor } from './interceptors/transform-response/transform-response.interceptor';
@@ -8,6 +8,9 @@ import { MiddlewareConsumer } from '@nestjs/common/interfaces';
 import { LoggerMiddleware } from './logger/logger.middleware';
 import { RequestMethod } from '@nestjs/common/enums';
 import { DatabaseModule } from 'src/database/database.module';
+import { CacheModule } from '@nestjs/cache-manager';
+import * as redisStore from 'cache-manager-redis-store';
+import { CacheService } from './cache/cache.service';
 
 @Global()
 @Module({
@@ -16,6 +19,24 @@ import { DatabaseModule } from 'src/database/database.module';
       load: [config],
     }),
     DatabaseModule,
+    CacheModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => {
+        const username = configService.get('redis.username');
+        const password = configService.get('redis.password');
+        return {
+          isGlobal: true,
+          store: redisStore,
+          host: configService.get('redis.host'),
+          port: configService.get('redis.port'),
+          ...(username && { username }),
+          ...(password && { password }),
+          no_ready_check: true,
+          ttl: 10,
+        };
+      },
+      inject: [ConfigService],
+    }),
   ],
   providers: [
     {
@@ -23,8 +44,9 @@ import { DatabaseModule } from 'src/database/database.module';
       useClass: TransformResponseInterceptor,
     },
     LoggerService,
+    CacheService,
   ],
-  exports: [LoggerService],
+  exports: [LoggerService, CacheService],
 })
 export class CoreModule {
   configure(consumer: MiddlewareConsumer) {
