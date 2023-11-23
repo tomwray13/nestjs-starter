@@ -7,7 +7,7 @@ import { LoggerService } from './logger/logger.service';
 import { MiddlewareConsumer } from '@nestjs/common/interfaces';
 import { LoggerMiddleware } from './logger/logger.middleware';
 import { RequestMethod } from '@nestjs/common/enums';
-import { DatabaseModule } from 'src/database/database.module';
+import { DatabaseModule } from '../database/database.module';
 import { CacheModule } from '@nestjs/cache-manager';
 import * as redisStore from 'cache-manager-redis-store';
 import { CacheService } from './cache/cache.service';
