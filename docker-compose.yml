@@ -13,7 +13,7 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - nestjs_starter_postgres_data:/var/lib/postgresql/data # Needs updating
 
   nestjs_starter_redis: # Needs updating
     image: redis:alpine
@@ -21,13 +21,13 @@ services:
     ports:
       - '6379:6379'
     volumes:
-      - redis_data:/data
+      - nestjs_starter_redis_data:/data # Needs updating
 
 networks:
   default:
-    name: nestjs_starter  # Needs updating
+    name: nestjs_starter # Needs updating
 
 volumes:
-  postgres_data:
-  redis_data:
+  nestjs_starter_postgres_data: # Needs updating
+  nestjs_starter_redis_data: # Needs updating
 
