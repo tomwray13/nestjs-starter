@@ -4,8 +4,8 @@ import config from '../config';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { TransformResponseInterceptor } from './interceptors/transform-response/transform-response.interceptor';
 import { LoggerService } from './logger/logger.service';
-import { MiddlewareConsumer } from '@nestjs/common/interfaces';
-import { LoggerMiddleware } from './logger/logger.middleware';
+import { MiddlewareConsumer, NestModule } from '@nestjs/common/interfaces';
+import { LoggerMiddleware } from './middleware/logger.middleware';
 import { RequestMethod } from '@nestjs/common/enums';
 import { DatabaseModule } from '../database/database.module';
 import { CacheModule } from '@nestjs/cache-manager';
@@ -49,7 +49,7 @@ import { CacheService } from './cache/cache.service';
   ],
   exports: [LoggerService, CacheService],
 })
-export class CoreModule {
+export class CoreModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(LoggerMiddleware)

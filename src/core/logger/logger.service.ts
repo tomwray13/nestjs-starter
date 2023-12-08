@@ -1,15 +1,17 @@
 import { Injectable, LoggerService as NestLogger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import * as winston from 'winston';
 
 @Injectable()
 export class LoggerService implements NestLogger {
   private readonly logger: winston.Logger;
 
-  constructor() {
+  constructor(private readonly configService: ConfigService) {
     const { combine, timestamp, printf, colorize, json } = winston.format;
 
     // Determine if the application is running in development mode
-    const isDevelopment = process.env.NODE_ENV === 'development';
+    const isDevelopment =
+      this.configService.get(`environment`) === 'development';
 
     // Choose a format based on the environment
     const logFormat = isDevelopment
