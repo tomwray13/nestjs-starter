@@ -20,6 +20,6 @@ export class AppService {
     this.cache.set(`key`, `VALUE FROM CACHE`, 1000);
     const valueFromCache = await this.cache.get(`key`);
     console.log(`valueFromCache`, valueFromCache);
-    return `Hello world`;
+    return 'Hello world';
   }
 }
