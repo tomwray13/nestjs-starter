@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  nestjs_starter_test_postgres: # Needs updating
+    image: postgres:alpine
+    container_name: nestjs_starter_test_postgres # Needs updating
+    restart: 'no'
+    env_file:
+      - .env.test
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - '5444:5432'
+    volumes:
+      - nestjs_starter_test_postgres_data:/var/lib/postgresql/data # Needs updating
+
+  nestjs_starter_test_redis: # Needs updating
+    image: redis:alpine
+    container_name: nestjs_starter_test_redis # Needs updating
+    ports:
+      - '6380:6379'
+    volumes:
+      - nestjs_starter_test_redis_data:/data # Needs updating
+
+networks:
+  default:
+    name: nestjs_starter_test # Needs updating
+
+volumes:
+  nestjs_starter_test_postgres_data: # Needs updating
+  nestjs_starter_test_redis_data: # Needs updating

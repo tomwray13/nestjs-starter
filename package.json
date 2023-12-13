@@ -18,9 +18,12 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "test:e2e": "pnpm docker:start:test && pnpm db:migrate:test && dotenv -e .env.test -- jest --runInBand --config ./test/jest-e2e.json && pnpm docker:down:test",
     "docker:start": "docker-compose up -d",
+    "docker:start:test": "docker-compose -f docker-compose-test.yml up -d",
+    "docker:down:test": "docker-compose -f docker-compose-test.yml down",
     "db:migrate:dev": "npx prisma migrate dev",
+    "db:migrate:test": "dotenv -e .env.test -- npx prisma migrate reset --force --skip-seed",
     "db:migrate:prod": "npx prisma migrate deploy",
     "db:studio": "npx prisma studio"
   },
